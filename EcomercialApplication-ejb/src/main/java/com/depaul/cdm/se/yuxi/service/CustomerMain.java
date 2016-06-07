@@ -36,7 +36,7 @@ public class CustomerMain {
     }
      private void createCustomer() {
         Customer customer = new Customer();
-        customer.setAge(12);
+        customer.setAge("12");
         customer.setLastName("YU");
         customer.setFirstName("XI");
         customer.setGender("Female");

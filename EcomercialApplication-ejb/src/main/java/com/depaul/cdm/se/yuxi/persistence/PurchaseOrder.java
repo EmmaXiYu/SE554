@@ -6,32 +6,97 @@
 package com.depaul.cdm.se.yuxi.persistence;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.Collection;
+import java.util.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Version;
 
 /**
  *
- * @author YUXI
+ * @author apple
  */
 @Entity
-public class PurchaseOrder implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+@NamedQueries({
+    @NamedQuery(name="findAllOrderOfAUser",query="select b from PurchaseOrder b WHERE b.customerId.customerId = :id"),
+   @NamedQuery(name="findOrderWith2Id",query="select b from PurchaseOrder b WHERE b.customerId.customerId = :id and b.orderId = :pId"),
+   
+}) 
+public class PurchaseOrder implements Serializable{
+      private static final long serialVersionUID = 1L;
 
     @Version
     @Column
     private Integer version;
     @Id
-   // @Column(name = "Order_customer_id")
+    @Column(name="ORDER_ID")
+      @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long orderId;
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
+    public Collection<PurchaseOrderItem> getPurchaseOrderItemCollection() {
+        return purchaseOrderItemCollection;
+    }
+
+    public void setPurchaseOrderItemCollection(Collection<PurchaseOrderItem> purchaseOrderItemCollection) {
+        this.purchaseOrderItemCollection = purchaseOrderItemCollection;
+    }
+   
     @JoinColumn(name = "CUSTOMER_ID",
             referencedColumnName = "CUSTOMER_ID")
     @ManyToOne(optional = false)
     private Customer customerId;
-    @Id
-    //@Column(name = "Order_rpoduct_id")
-    @JoinColumn(name = "PRODUCT_ID",
-            referencedColumnName = "PRODUCT_ID")
+
+ @OneToMany(cascade=CascadeType.PERSIST,
+            mappedBy="orderId",fetch= FetchType.EAGER
+            )
+    private Collection<PurchaseOrderItem> purchaseOrderItemCollection;
+   
+  
+
+    public Address getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Address addressId) {
+        this.addressId = addressId;
+    }
+
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+  
+  @JoinColumn(name = "ARRESS_ID",
+            referencedColumnName = "ARRESS_ID")
     @ManyToOne(optional = false)
-    private Product productId;
+    private Address addressId;
+    @JoinColumn(name = "PAYMENT_ID",
+            referencedColumnName = "PAYMENT_ID")
+    @ManyToOne(optional = false)
+    private PaymentMethod paymentMethod;
+   
 
     public Customer getCustomer() {
         return customerId;
@@ -40,12 +105,15 @@ public class PurchaseOrder implements Serializable {
     public void setCustomer(Customer c_id) {
         this.customerId = c_id;
     }
-    
-    public Product getProduct()
-    {
-    return productId;}
-    public void setProduct(Product pro){
-        this. productId = pro;
+
+    public String getOrderTime() {
+        return orderTime;
     }
 
+    public void setOrderTime(String orderTime) {
+        this.orderTime = orderTime;
+    }
+       @Column
+    private String orderTime;
+    
 }

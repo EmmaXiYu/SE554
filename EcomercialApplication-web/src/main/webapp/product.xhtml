@@ -1,0 +1,35 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">  
+
+    <h:head> <title>Login Page</title></h:head>
+        
+    <h:body>
+      <h:outputText id="cartSize" value="You cart has #{shoppingCartProductContoller.cartCount} item(s)"/><br></br>
+        Product Id:<h:outputText value="#{shoppingCartProductContoller.clickedProduct.productId}"/><br></br>
+        Product Name:<h:outputText value="#{shoppingCartProductContoller.clickedProduct.name}"/><br></br>
+        Product Type:<h:outputText value="#{shoppingCartProductContoller.clickedProduct.category}"/><br></br>
+        Product Description:<h:outputText value="#{shoppingCartProductContoller.clickedProduct.description}"/><br></br>
+        Product Unit Price:<h:outputText value="#{shoppingCartProductContoller.clickedProduct.unitPrice}"/><br></br>
+        Product Number:<h:outputText value="#{shoppingCartProductContoller.clickedProduct.number}"/><br></br>
+        Product Manufacture:<h:outputText value="#{shoppingCartProductContoller.clickedProduct.manufacture}"/><br></br>
+        Product Expiration Date:
+        <h:outputText value="#{shoppingCartProductContoller.clickedProduct.expirationDate}"/><br></br>
+        <h:form id='form'>
+            <input type="hidden" name="productId" value="#{shoppingCartProductContoller.clickedProduct.productId}"/>
+            <h:commandButton value="Add To Cart " action="#{shoppingCartProductContoller.addToCart()}">
+                <f:ajax execute="@form" render=":cartSize"/>
+            </h:commandButton>
+        </h:form><br></br><br></br>
+        
+        
+        <h:outputLink value="cart.xhtml">Go to your shopping cart</h:outputLink><br></br><br></br>
+        <h:outputLink value="viewAllProduct.xhtml">Go back to view product</h:outputLink>
+    </h:body>
+</html>

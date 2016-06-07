@@ -18,27 +18,24 @@ import java.util.*;
  * @author apple
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name="findAllFoodProduct",query="select b from FoodProduct b "),
+   
+}) 
+@DiscriminatorValue(value = "Food_Product")
 public class FoodProduct extends Product{
 
     
-   @Temporal(TemporalType.DATE)
-   private Date expirationDate;
-   private String category;
+
+   private String expirationDate;
    
-   public Date getExpirationDate()
+   public String getExpirationDate()
    {
    return expirationDate;}
-   public void setExpirationDate(Date date)
+   public void setExpirationDate(String date)
    {
    this.expirationDate = date ;}
-   public String getCategory()
-   {
-       return category;
-   }
-   public void setCategory(String category)
-   {
-       this.category = category;
-   }
+   
    
      
    

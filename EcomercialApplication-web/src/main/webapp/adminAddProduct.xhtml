@@ -1,0 +1,67 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">  
+
+    <h:head> <title>Login Page</title></h:head>
+        
+    <h:body>
+        
+         <p:messages id="messages" showDetail="true" autoUpdate="true"/>
+           <h:form >
+            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="4" >
+                <h:outputLabel value="Product Category : "/> 
+                  <p:selectOneMenu id="gender" value="#{adminProductController.product.category}" required="true" label="Product Category">
+                       <f:selectItem itemLabel="SelectOne" itemValue="" />
+                    <f:selectItem itemLabel="Electronic Product" itemValue="Electronic Product" />
+                    <f:selectItem itemLabel="Food Product" itemValue="Food Product" />
+                    <f:ajax render="tables" />
+                   
+                </p:selectOneMenu>
+               <h:outputLabel value="Product Name : "/> 
+               <p:inputText value="#{adminProductController.product.name}" required="true" label="Product Name"/>
+               <h:outputLabel value="Product Description : "/> 
+               <p:inputText value="#{adminProductController.product.description}" required="true" label="Product Description "/>
+                <h:outputLabel value="Product Number : "/> 
+                <p:inputText value="#{adminProductController.product.number}" required="true" label="Product Number "/>
+               <h:outputLabel value="Electronic Product Manufacture : " /> 
+      <p:inputText value="#{adminProductController.product.manufacture}"  
+                      required="false" label="Electronic Product Manufacture "/>
+      <h:outputLabel value="Food Product Expiration Date : "  /> 
+               <p:inputText value="#{adminProductController.product.expirationDate}" 
+                           
+                            required="false" label="Food Product Expiration Date"/>
+           <h:outputLabel value="Product Unit Price: "  /> 
+           <p:inputText value="#{adminProductController.product.unitPrice}" 
+                           
+                            required="false" label="Product Unit Price"/>
+           
+            
+               
+      <h:panelGroup id="tables">
+                           
+      <h:outputLabel value="Electronic Product Manufacture : " rendered="#{adminProductController.product.category == 'Electronic Product'}"/> 
+      <p:inputText value="#{adminProductController.product.manufacture}"  rendered="#{adminProductController.product.category == 'Electronic Product'}"
+                      required="false" label="Electronic Product Manufacture "/>
+      <h:outputLabel value="Food Product Expiration Date : " rendered="#{adminProductController.product.category == 'Food Product'}" /> 
+               <p:inputText value="#{adminProductController.product.expirationDate}" 
+                            rendered="#{adminProductController.product.category == 'Food Product'}" 
+                            required="false" label="Food Product Expiration Date"/>
+          
+          </h:panelGroup >
+
+    
+           
+            </h:panelGrid>
+                
+            <p:commandButton value="Add"  styleClass="styleBlue"                           
+                             action="#{adminProductController.addProduct}"/>            
+        </h:form>
+       
+                        
+    </h:body>
+</html>

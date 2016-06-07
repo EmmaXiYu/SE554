@@ -12,11 +12,15 @@ import javax.persistence.*;
  * @author apple
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name="findAllElectronicProduct",query="select b from ElectronicProduct b "),
+   
+}) 
+@DiscriminatorValue(value = "Electronic_Product")
 public class ElectronicProduct extends Product {
 
     private String manufacture;
-     private String category;
-
+    
     public String getManufacture() {
         return manufacture;
     }
@@ -25,12 +29,5 @@ public class ElectronicProduct extends Product {
         this.manufacture = m;
     }
     
-     public String getCategory()
-   {
-       return category;
-   }
-   public void setCategory(String category)
-   {
-       this.category = category;
-   }
+   
 }

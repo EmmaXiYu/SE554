@@ -3,7 +3,7 @@
     <persistence-unit name="jpa-project" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <jta-data-source>jdbc/SE554</jta-data-source>
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <!--<exclude-unlisted-classes>false</exclude-unlisted-classes>-->
         <class>com.com.depaul.cdm.se.yuxi.persistence.Address</class>
         <class>com.com.depaul.cdm.se.yuxi.persistence.Customer</class>
         <class>com.com.depaul.cdm.se.yuxi.persistence.ElectronicProduct</class>
@@ -11,13 +11,14 @@
         <class>com.com.depaul.cdm.se.yuxi.persistence.PaymentMethod</class>
         <class>com.com.depaul.cdm.se.yuxi.persistence.Product</class>
         <class>com.com.depaul.cdm.se.yuxi.persistence.PurchaseOrder</class>
+           <class>com.com.depaul.cdm.se.yuxi.persistence.ShoppingCartItem</class>
+           <class>com.com.depaul.cdm.se.yuxi.persistence.PurchaseOrderItem</class>
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
             <property name="javax.persistence.schema-generation.create-source" value="script-then-metadata"/>
             <property name="javax.persistence.schema-generation.drop-source" value="script-then-metadata"/>
-         <property name="javax.persistence.schema-generation.create-script-source" value="META-INF/create.sql"/> 
-            <property name="javax.persistence.schema-generation.drop-script-source" value="META-INF/drop.sql"/> 
-            <property name="javax.persistence.sql-load-script-source" value="META-INF/load.sql"/> 
+         
+
             <property name="eclipselink.logging.level" value="FINEST"/>
         </properties>
     </persistence-unit>

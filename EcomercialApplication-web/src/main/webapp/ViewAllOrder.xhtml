@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">  
+    <head>
+        <title>View All Order</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+        <h:dataTable value="#{orderContoller.viewAllOrder()}" var="o">
+         <h:column> 
+             <f:facet name="header"/>
+                  
+             Order Id: <h:outputText value="#{o.orderId}"/><br></br> 
+    Order Time: <h:outputText value="#{o.orderTime}"/><br></br> 
+    <br></br> Address Information:<br></br> 
+    Address Line 1:<h:outputText value="#{o.addressId.addressLine1}"/>  <br></br> 
+    Address Line 2:<h:outputText value="#{o.addressId.addressLine2}"/>  <br></br>    
+    State:<h:outputText value="#{o.addressId.state}"/>  <br></br> 
+    City:<h:outputText value="#{o.addressId.city}"/>  <br></br> 
+    Zip Code:<h:outputText value="#{o.addressId.zipCode}"/> <br></br>  
+    <br></br> Payment Information:<br></br> 
+    Credit Type:<h:outputText value="#{o.paymentMethod.type}"/>  <br></br> 
+   Card Number:<h:outputText value="#{o.paymentMethod.cardNumber}"/> <br></br>     
+    Expiration Date :<h:outputText value="#{o.paymentMethod.expirationDate}"/>  <br></br> 
+    CVV:<h:outputText value="#{o.paymentMethod.securityCode}"/>   <br></br>
+    <br></br> <br></br> Item Information:<br></br> 
+    <h:dataTable value="#{orderContoller.viewAllItemOfAOrder(o.orderId)}" var="p">
+         <h:column> 
+             <f:facet name="header"/>
+             Product Name:<h:outputText value="#{p.product.name}"/><br></br> 
+             Product Description:<h:outputText value="#{p.product.description}"/><br></br> 
+             Product Category:<h:outputText value="#{p.product.category}"/><br></br> 
+             Product Manufacture:<h:outputText value="#{p.product.manufacture}"/><br></br> 
+             Product Expiration Date:<h:outputText value="#{p.product.expirationDate}"/><br></br> 
+             Product Unit Price:<h:outputText value="#{p.product.unitPrice}"/><br></br> 
+             Product Quantity:<h:outputText value="#{p.quantity}"/><br></br> 
+         </h:column>
+       
+        </h:dataTable>    
+         </h:column>
+       
+        </h:dataTable>    
+    </body>
+</html>

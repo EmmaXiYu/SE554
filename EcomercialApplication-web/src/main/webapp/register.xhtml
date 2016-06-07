@@ -1,0 +1,53 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">  
+
+    <h:head> <title>Register Page</title>
+     <link rel="stylesheet" type="text/css" href="register.css"></link></h:head>
+    <h:body>
+        <p:messages id="messages" showDetail="true" autoUpdate="true"/>
+                
+        <h:form >
+            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="4" >
+               <h:outputLabel value="First Name : "/> 
+                <p:inputText value="#{customerController.customer.firstName}" required="true" label="First name"/>
+                <h:outputLabel value="Last Name : "/>
+                <p:inputText value="#{customerController.customer.lastName}" required="true" label="Last name"/>
+                <h:outputLabel value="Age: "/>
+                <p:selectOneMenu id="age" value="#{customerController.customer.age}" required="false" label="Age">
+                    <f:selectItem itemLabel="Select One" itemValue="" />
+                    <f:selectItem itemLabel="0-20" itemValue="0-20" />
+                    <f:selectItem itemLabel="21-40" itemValue="21-40" />
+                    <f:selectItem itemLabel="41-60" itemValue="41-60" />
+                    <f:selectItem itemLabel="61-80" itemValue="61-80" />
+                      <f:selectItem itemLabel="Above 80" itemValue="Above 80" />
+                </p:selectOneMenu>
+               
+                <h:outputLabel value="Gender : " />
+
+                <p:selectOneMenu id="gender" value="#{customerController.customer.gender}" required="false" label="Gender">
+                    <f:selectItem itemLabel="Select One" itemValue="" />
+                    <f:selectItem itemLabel="Female" itemValue="Female" />
+                    <f:selectItem itemLabel="Male" itemValue="Male" />
+                    <f:selectItem itemLabel="Others" itemValue="Others" />
+                </p:selectOneMenu>
+                <h:outputLabel value="Email : " />
+                <p:inputText value="#{customerController.customer.email}" required="true" label="Gmail"/>
+                <h:outputLabel for="pwd1" value="Enter Password: " />
+                <p:password id="pwd1" value="#{customerController.customer.password}" feedback="false" match="pwd2" label="Password " required="true"/>
+
+                <h:outputLabel for="pwd2" value="Confirmed Password:" />
+                <p:password id="pwd2" value="#{customerController.customer.password}" feedback="false" label="Confirmed Password" required="true"/>
+
+            </h:panelGrid>
+            <p:commandButton value="Register"  styleClass="styleBlue"                           
+                             action="#{customerController.registerNewCustomer}"/>            
+        </h:form>
+
+    </h:body>
+</html>

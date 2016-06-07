@@ -31,10 +31,11 @@ public class RegisterServlet extends javax.servlet.http.HttpServlet {
             String firstName = (String) request.getParameter("firstName");
             String  lastName = (String) request.getParameter("lastName");
             String gender = (String) request.getParameter("Gender");
-            int age = Integer.parseInt( request.getParameter("age"));
-
-            registerService.register(firstName, lastName, gender, age);
-            //request.getRequestDispatcher("ListAccount").forward(request, response);
+            String age =request.getParameter("age");
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+           // registerService.register(firstName, lastName, gender, age,email,password);
+            request.getRequestDispatcher("index.html").forward(request, response);
         } catch (Exception ex) {
             throw new ServletException(ex);
         }

@@ -14,7 +14,14 @@ import java.util.*;
  * @author YUXI
  */
 @Entity
-@NamedQuery(name = "findAllCustomers", query = "select b from Customer b")
+@NamedQueries({
+    @NamedQuery(name="findAllCustomers",query="select b from Customer b"),
+    @NamedQuery(name="findCustomerwithEmail",
+                query="SELECT c FROM Customer c WHERE c.email = :email"),
+    @NamedQuery(name="AutenticateUserWithEmailAndPassword", query="SELECT c FROM Customer c WHERE c.email = :email AND c.password = :password  "),
+}) 
+
+
 public class Customer
         implements Serializable {
 
@@ -33,17 +40,47 @@ public class Customer
     @Column
     private String gender;
     @Column
-    private Integer age;
+    private String age;
+    @Column 
+    private String email;
+    @Column 
+    private String password;
+    @Column
+    private double balance;
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
     
-    @OneToMany(cascade = CascadeType.ALL,
+    
+    @OneToMany(cascade = CascadeType.PERSIST,
+            mappedBy="customerId",fetch= FetchType.EAGER
+            )
+    private Collection<ShoppingCartItem> shoppingCartItemCollection;
+
+    public Collection<ShoppingCartItem> getShoppingCartItemCollection() {
+        return shoppingCartItemCollection;
+    }
+
+    public void setShoppingCartItemCollection(Collection<ShoppingCartItem> shoppingCartItemCollection) {
+        this.shoppingCartItemCollection = shoppingCartItemCollection;
+    }
+    @OneToMany(cascade = CascadeType.PERSIST,
             mappedBy="customerId",fetch= FetchType.EAGER
             )
     private Collection<PurchaseOrder> purchaseOrderCollection;
-    
-    @OneToMany(cascade = CascadeType.ALL,
+    @OneToMany(cascade = CascadeType.PERSIST,
             mappedBy="customerId",fetch= FetchType.EAGER
             )
         private Collection<Address> addressCollection;
+    @OneToMany(cascade = CascadeType.PERSIST,
+            mappedBy="customerId",fetch= FetchType.EAGER
+            )
+        private Collection<PaymentMethod> paymentMethodCollection;
     public Long getId() {
         return customerId;
 
@@ -87,12 +124,51 @@ public class Customer
         this.gender = genderText;
     }
 
-    public Integer getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(Integer age) {
+    public void setAge(String age) {
         this.age = age;
     }
+    public String getEmail()
+    {
+    return email;}
+    public void setEmail(String email)
+    {
+    this.email=email;
+    }
+    public void setPassword(String password)
+    {
+    this.password=password;
+    }
+    public String getPassword()
+    {
+    return password;
+    }
 
+    public Collection<PurchaseOrder> getPurchaseOrderCollection() {
+        return purchaseOrderCollection;
+    }
+
+    public void setPurchaseOrderCollection(Collection<PurchaseOrder> purchaseOrderCollection) {
+        this.purchaseOrderCollection = purchaseOrderCollection;
+    }
+    
+  
+    public Collection<PaymentMethod>  getPaymentMethodCollection()
+    {return  paymentMethodCollection;
+    }
+    public void setPaymentMethodCollection(Collection<PaymentMethod> paymentMethodCollection)
+    {
+        this.paymentMethodCollection=paymentMethodCollection;
+    }
+
+    public Collection<Address>  getAddressCollection()
+    {return  addressCollection;
+    }
+    public void setAddressCollection(Collection<Address> addressCollection)
+    {
+        this.addressCollection=addressCollection;
+    }
 }

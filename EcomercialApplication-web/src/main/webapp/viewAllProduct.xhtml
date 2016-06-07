@@ -1,0 +1,51 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">  
+
+    <h:head> <title>Login Page</title></h:head>
+        
+    <h:body>
+        <h:outputText value=" All Products:"/>
+       
+        <h:dataTable value="#{viewAllProductController.products}" var="p">
+         <h:column> 
+             <f:facet name="header"/>
+             <h:outputLink value="product.xhtml">
+                 <f:param name="productId" value="#{p.productId}"/>
+                 <h:outputText value="#{p.name}"/>
+             </h:outputLink>
+         </h:column>
+       
+        </h:dataTable>    
+        <h:outputText value=" All Electronic Products "/>
+        <h:dataTable value="#{viewAllProductController.electronicProducts}" var="ep">
+         <h:column> 
+             <f:facet name="header"/>
+             <h:outputLink value="product.xhtml">
+                 <f:param name="productId" value="#{ep.productId}"/>
+                 <h:outputText value="#{ep.name}"/>
+             </h:outputLink>
+         </h:column>     
+        </h:dataTable>   
+      
+           <h:outputText value=" All Food Products  "/>
+         
+        <h:dataTable value="#{viewAllProductController.foodProducts}" var="fp">
+         <h:column> 
+             <f:facet name="header"/>
+             <h:outputLink value="product.xhtml">
+                 <f:param name="productId" value="#{fp.productId}"/>
+                 <h:outputText value="#{fp.name}"/>
+             </h:outputLink>
+         </h:column>     
+        </h:dataTable>   
+       
+       
+    </h:body>
+</html>

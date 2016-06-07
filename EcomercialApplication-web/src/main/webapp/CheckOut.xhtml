@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+   
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>Check Out</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+       
+        <div id="Address">
+             <h3>Choose Shipping Address</h3>
+        <h:dataTable value="#{checkOutController.addressList}" var="a">
+           
+         <h:column> 
+             <f:facet name="header"/>
+             <input type="radio" name="addressId" value="#{a.addressId}"/>Choose Shipping Address id# #{a.addressId}<br></br>
+             
+                 
+                 Address Line 1: <h:outputText value="#{a.addressLine1}"/><br></br>
+                 Address Line 2: <h:outputText value="#{a.addressLine2}"/><br></br>
+                 City:<h:outputText value="#{a.city}"/><br></br>
+                 State:<h:outputText value="#{a.state}"/><br></br>
+                 Zip Code:<h:outputText value="#{a.zipCode}"/><br></br>
+                 
+           
+         </h:column>
+        </h:dataTable><br></br><br></br>
+        </div>
+        <div id="Payment"> 
+             <h3>Choose Payment Method</h3>
+        <h:dataTable value="#{checkOutController.paymentMethodList}" var="p"><br></br>
+               
+         <h:column> 
+             <f:facet name="header"/>
+             <input type="radio" name="paymentMethodId" value="#{p.id}" />Choose Payment id# #{p.id}<br></br>
+          
+                 
+                 Card Type:<h:outputText value="#{p.type}"/><br></br>
+                 Card Number:<h:outputText value="#{p.cardNumber}"/><br></br>
+                 Expiration Date:<h:outputText value="#{p.expirationDate}"/><br></br>
+                 Security Code:<h:outputText value="#{p.securityCode}"/><br></br>
+                 
+                 
+        
+         </h:column>
+        </h:dataTable><br></br><br></br>
+        </div>
+        <div id="confirm check out items">
+             <h3>Please confirm your checking out items</h3>
+              <ui:repeat  value="#{shoppingCartProductContoller.cartContents.entrySet().toArray()}" var="p">
+       
+            Your product name is :#{p.key.name} <br></br>
+          
+          Your product unit price is: #{p.key.unitPrice} <br></br>
+              
+           Your Product count is:#{p.value} <br></br>
+               
+            Your product total price is: 
+           
+            <h:outputText value="#{p.key.unitPrice * p.value}"/>
+             <br></br>
+            
+            <br></br>
+           
+   
+   </ui:repeat>
+ 
+            <br></br>
+            <h3>The checking out total is $:#{shoppingCartProductContoller.finalBill}</h3>
+            </div>
+         <h:form>
+             <h:commandButton value="Pay" action="#{shoppingCartProductContoller.checkOut()}">  
+                    </h:commandButton>
+              
+             </h:form>
+      <script type="text/javascript">
+        
+      </script>
+    </body>
+</html>

@@ -1,0 +1,44 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">  
+
+    <h:head> <title>Add Address Page</title></h:head>
+        
+    <h:body>
+        
+         <p:messages id="messages" showDetail="true" autoUpdate="true"/>
+           <h:form >
+            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="4" >
+               <h:outputLabel value= "Type : "/> 
+               <p:inputText value="#{customerPaymentController.paymentMethod.type}" required="true" label="Type"/>
+               
+              <h:outputLabel value= "Card Number : "/> 
+              <p:inputText value="#{customerPaymentController.paymentMethod.cardNumber}" required="true" label="Card Number"/>
+               <h:outputLabel value= "Expeiration Date : "/> 
+               <p:inputText value="#{customerPaymentController.paymentMethod.expirationDate}" required="true" label="Expeiration Date"/>
+               <h:outputLabel value= "Security Code: "/> 
+               <p:inputText value="#{customerPaymentController.paymentMethod.securityCode}" required="true" label="Security Code"/>
+              
+            </h:panelGrid>
+            <p:commandButton value="Submit"  styleClass="styleBlue"                           
+                             action="#{customerPaymentController.addPayment}"/>	
+               
+                                        
+        </h:form>
+        Payment Method List:
+        <h:dataTable value="#{customerPaymentController.paymentMethodList}" var="paymentMethod">
+         <h:column> 
+             <f:facet name="header"/>  
+             Payment Method Id:<h:outputText value="#{paymentMethod.id}"/><br></br>
+             Payment Type:<h:outputText value="#{paymentMethod.type}"/><br></br>
+             Payment Card Number:<h:outputText value="#{paymentMethod.cardNumber}"/><br></br><br></br>
+         </h:column>     
+        </h:dataTable>      
+    </h:body>
+</html>

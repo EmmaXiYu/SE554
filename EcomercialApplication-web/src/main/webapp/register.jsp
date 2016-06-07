@@ -19,6 +19,8 @@
         <tr><td>Last Name:</td><td><input type="text" id = "ln" name="lastName" /></td></tr>
          <tr><td>Gender:</td><td><input type="text" id = "gender" name="Gender" /></td></tr>
           <tr><td>Age:</td><td><input type="text" id = "age" name="age" /></td></tr>
+          <tr><td>Email:</td><td><input type="text" id = "age" name="email" /></td></tr>
+          <tr><td>Password:</td><td><input type="text" id = "age" name="password" /></td></tr>
     </table>
     <input type="submit" id="Register" value="Register" />
     </form>

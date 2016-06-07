@@ -1,0 +1,49 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"   
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">  
+
+    <h:head> <title>Add Address Page</title></h:head>
+        
+    <h:body>
+        
+         <p:messages id="messages" showDetail="true" autoUpdate="true"/>
+           <h:form >
+            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="4" >
+               <h:outputLabel value= "Address Line 1 : "/> 
+               <p:inputText value="#{customerAddressController.address.addressLine1}" required="true" label="Address Line 1"/>
+               
+              <h:outputLabel value= "Address Line 2 : "/> 
+               <p:inputText value="#{customerAddressController.address.addressLine2}" required="false" label="Address Line 2"/>
+               <h:outputLabel value= "State: "/> 
+               <p:inputText value="#{customerAddressController.address.state}" required="true" label="State"/>
+               <h:outputLabel value= "City: "/> 
+               <p:inputText value="#{customerAddressController.address.city}" required="true" label="City"/>
+               <h:outputLabel value= "Zip code "/> 
+               <p:inputText value="#{customerAddressController.address.zipCode}" required="true" label="Zip cpde"/>
+            </h:panelGrid>
+            <p:commandButton value="Submit"  styleClass="styleBlue"                           
+                             action="#{customerAddressController.addNewAddress}"/>	
+               
+                                        
+        </h:form>
+         Address List:
+         <h:dataTable value="#{customerAddressController.addressList}" var="address">
+         <h:column> 
+             <f:facet name="header"/>  
+             Address Id:<h:outputText value="#{address.addressId}"/><br></br>
+             Address Line 1:<h:outputText value="#{address.addressLine1}"/><br></br>
+             Address Line 2: <h:outputText value="#{address.addressLine2}"/><br></br>
+             Address State: <h:outputText value="#{address.state}"/><br></br>
+             Address City: <h:outputText value="#{address.city}"/><br></br>
+             Address Zip Code: <h:outputText value="#{address.zipCode}"/><br></br><br></br>
+         </h:column>     
+        </h:dataTable>   
+        
+    </h:body>
+</html>

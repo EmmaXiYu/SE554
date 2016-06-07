@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head>
+        <title>Shopping Cart</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </head>
+    <body>
+ <h:outputText id="cartSize" value="You cart has #{shoppingCartProductContoller.cartCount} item(s)"/> <br></br>
+ <span id="productInformation">
+   <ui:repeat  value="#{shoppingCartProductContoller.cartContents.entrySet().toArray()}" var="p">
+       
+            Your product name is :#{p.key.name} <br></br>
+          
+          Your product unit price is: #{p.key.unitPrice} <br></br>
+              
+           Your Product count is:#{p.value} <br></br>
+               
+            Your product total price is: 
+           
+            <h:outputText value="#{p.key.unitPrice * p.value}"/>
+             <br></br>
+            <h:form>
+               <h:commandButton value="-" action="#{shoppingCartProductContoller.remove(p.key)}">  
+                    </h:commandButton>
+               <h:commandButton value="+" action="#{shoppingCartProductContoller.add(p.key)}">  
+                </h:commandButton>
+             </h:form>
+            <br></br>
+           
+   
+   </ui:repeat></span>
+ <h:outputLink value="CheckOut.xhtml">CheckOut</h:outputLink><br></br><br></br>
+            <br></br>
+    </body>
+</html>

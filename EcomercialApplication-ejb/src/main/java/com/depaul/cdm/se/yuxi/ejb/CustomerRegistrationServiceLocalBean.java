@@ -5,13 +5,16 @@
  */
 package com.depaul.cdm.se.yuxi.ejb;
 
+import com.depaul.cdm.se.yuxi.persistence.Customer;
+
 /**
  *
  * @author apple
  */
 public interface CustomerRegistrationServiceLocalBean {
     
-    public void register(String firstName, String lastName, String gender, Integer age);
+    public Customer register(Customer customer);
+    public boolean checkIfExistedUser(String email);
    // public void changePassword();
     //public void retrievePassword();
     //public void changeUserInformation();

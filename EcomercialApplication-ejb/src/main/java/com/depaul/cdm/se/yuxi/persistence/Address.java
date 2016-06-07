@@ -6,6 +6,7 @@
 package com.depaul.cdm.se.yuxi.persistence;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.*;
 
 /**
@@ -13,14 +14,18 @@ import javax.persistence.*;
  * @author yu xi
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name="findAllAddressOfAUser",query="select b from Address b WHERE b.customerId.customerId = :id"),
+   
+}) 
 
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
-     @Id
-    @Column
+    @Id
+  @Column(name="ARRESS_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private String addressId;
     
     @Column(name="Address_Line1")
     private String addressLine1;
@@ -28,6 +33,8 @@ public class Address implements Serializable {
     private String addressLine2;
     @Column(name="Address_City")
     private String city;
+
+  
     @Column(name="Address_State")
     private String state;
     @Column(name="Address_Zip")
@@ -37,10 +44,27 @@ public class Address implements Serializable {
             referencedColumnName = "CUSTOMER_ID")
     @ManyToOne(optional = false)
     private Customer customerId;
-    public String getId()
-    {return id;}
-    public void setId(String id)
-    {this.id = id;}
+    @OneToMany(cascade=CascadeType.PERSIST,
+            mappedBy="addressId",fetch= FetchType.EAGER
+            )
+    private Collection<PurchaseOrder> purchaseOrderCollection;
+
+    public String getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(String addressId) {
+        this.addressId = addressId;
+    }
+   
+
+    public Collection<PurchaseOrder> getPurchaseOrderCollection() {
+        return purchaseOrderCollection;
+    }
+
+    public void setPurchaseOrderCollection(Collection<PurchaseOrder> purchaseOrderCollection) {
+        this.purchaseOrderCollection = purchaseOrderCollection;
+    }
     public Customer getCustomer()
     {
     return customerId;
